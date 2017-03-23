@@ -1,4 +1,4 @@
-package com.example.scalephoto.http.download;
+package com.example.scalephoto.http.getfile;
 
 import android.text.TextUtils;
 
@@ -24,7 +24,7 @@ import java.util.Map;
  * <p>
  * 文件下载
  */
-public class HttpFileDownLoader extends BaseHttp {
+public class HttpGetFile extends BaseHttp {
     private static final String TAG = "HttpFileDownLoader";
 
     /**
@@ -36,7 +36,7 @@ public class HttpFileDownLoader extends BaseHttp {
     /**
      * 发送POST请求
      */
-    public void _get_file(String url, Map<String, String> headers, Map<String, String> params, String destFilePath, FileDownLoadListener mListener) {
+    public void _get_file(String url, Map<String, String> headers, Map<String, String> params, String destFilePath, OnGetFileListener mListener) {
         NetLogUtils.d(TAG, "---_get_file---");
         NetLogUtils.d(TAG, "url: " + url);
         NetLogUtils.d(TAG, "headers: " + headers);

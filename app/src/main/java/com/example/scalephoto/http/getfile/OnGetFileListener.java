@@ -1,4 +1,4 @@
-package com.example.scalephoto.http.download;
+package com.example.scalephoto.http.getfile;
 
 import java.util.Map;
 
@@ -6,7 +6,7 @@ import java.util.Map;
  * <p>
  * 功能 文件相关请求回调
  */
-public interface FileDownLoadListener<T> {
+public interface OnGetFileListener<T> {
     /**
      * 文件任务成功回调
      *

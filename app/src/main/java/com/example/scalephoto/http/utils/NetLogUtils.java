@@ -8,7 +8,7 @@ import android.util.Log;
 public class NetLogUtils {
     private static final int LOG_LEVEL_MIN = Log.VERBOSE;
 
-    private static final String SNS_TAG = "sns_lib_agent ";
+    private static final String SNS_TAG = "xiaxl_lib_agent ";
 
     /**
      *

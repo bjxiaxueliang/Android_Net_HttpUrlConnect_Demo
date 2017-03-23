@@ -5,38 +5,11 @@
 
 
     <Button
-        android:id="@+id/button01"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="插入数据" />
-
-    <TextView
-        android:id="@+id/textView001"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button01"
-        android:layout_centerHorizontal="true"
-        android:text="TextView01" />
-
-
-    <Button
-        android:id="@+id/button02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView001"
-        android:layout_centerHorizontal="true"
-        android:text="获取数据" />
-
-
-    <Button
-        android:id="@+id/button03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button02"
-        android:layout_centerHorizontal="true"
-        android:text="删除数据" />
+        android:gravity="center"
+        android:text="点击获取公网IP" />
 
 
 </RelativeLayout>

@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.example.scalephoto.http.HttpDelete;
+import com.example.scalephoto.http.HttpGet;
 import com.example.scalephoto.http.HttpLongPoll;
 import com.example.scalephoto.http.HttpMulti;
-import com.example.scalephoto.http.download.FileDownLoadListener;
-import com.example.scalephoto.http.download.HttpFileDownLoader;
+import com.example.scalephoto.http.getfile.HttpGetFile;
+import com.example.scalephoto.http.getfile.OnGetFileListener;
 import com.example.scalephoto.http.utils.NetJsonUtils;
 import com.example.scalephoto.http.utils.NetLogUtils;
 
@@ -24,13 +25,41 @@ public class HttpAgent {
 
 
     /**
+     * @param url
+     * @param params
+     * @param headers
+     */
+    public static <T> T get_Sync(String url, Map<String, String> headers, Map<String, String> params, final Class<T> cls) throws InterruptedException, ExecutionException {
+        NetLogUtils.d(TAG, "---get_Async---");
+        NetLogUtils.d(TAG, "url: " + url);
+        NetLogUtils.d(TAG, "headers: " + headers);
+        NetLogUtils.d(TAG, "params: " + params);
+        if (TextUtils.isEmpty(url)) {
+            throw new InterruptedException("url is null");
+        }
+
+        String response = "";
+        try {
+            //--------------同步耗时请求-------------
+            response = new HttpGet()._get(url, headers, params);
+            NetLogUtils.d(TAG, "response: " + response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new InterruptedException(e.getMessage());
+        }
+        //
+        return NetJsonUtils.json2Obj(response, cls);
+    }
+
+
+    /**
      * 私信长轮询
      *
      * @param url
      * @param params
      * @param headers
      */
-    public static <T> T get_Sync(String url, Map<String, String> headers, Map<String, String> params, final Class<T> cls) throws InterruptedException, ExecutionException {
+    public static <T> T getLongPoll_Sync(String url, Map<String, String> headers, Map<String, String> params, final Class<T> cls) throws InterruptedException, ExecutionException {
         NetLogUtils.d(TAG, "---get_Async---");
         NetLogUtils.d(TAG, "url: " + url);
         NetLogUtils.d(TAG, "headers: " + headers);
@@ -56,14 +85,14 @@ public class HttpAgent {
     /**
      * 私信的文件下载（校验最后512字节）
      */
-    public static void downLoadFile_Sync(String url, Map<String, String> headers, Map<String, String> params, String destFilePath, FileDownLoadListener mListener) {
+    public static void downLoadFile_Sync(String url, Map<String, String> headers, Map<String, String> params, String destFilePath, OnGetFileListener mListener) {
         NetLogUtils.d(TAG, "---downLoadFile_Sync---");
         NetLogUtils.d(TAG, "url: " + url);
         NetLogUtils.d(TAG, "headers: " + headers);
         NetLogUtils.d(TAG, "params: " + params);
         NetLogUtils.d(TAG, "destFilePath: " + destFilePath);
         //-----------------
-        HttpFileDownLoader downLoader = new HttpFileDownLoader();
+        HttpGetFile downLoader = new HttpGetFile();
         //
         downLoader._get_file(url, headers, params, destFilePath, mListener);
     }
